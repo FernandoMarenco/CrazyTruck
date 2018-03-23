@@ -174,11 +174,15 @@ table button:hover {
     top: -2px;
 }
 
-table button:first-child {
+table button.btnPin {
+    color: #E4BE15;
+}
+
+table button.btnEdit {
     color: #0062DA;
 }
 
-table button:last-child {
+table button.btnDelete {
     color: #DD1E1B;
 }
 /* End button edit and delete styles */
@@ -341,7 +345,7 @@ table.dataTable {
 }
 
 .btnFloat .btnSearch {
-    background-color: #0062DA;
+    background-color: #006DF0;
 }
 /* End button add and search styles*/
 
@@ -478,7 +482,14 @@ form input:focus, form select:focus, form textarea:focus {
         font-weight: 600;
         text-transform: uppercase;
         padding: 2px 10px;
+    }
+
+    .btnFloat .btnAdd {
         border-bottom: 3px solid #1A7F06;
+    }
+
+    .btnFloat .btnSearch {
+        border-bottom: 3px solid #004EAC;
     }
 
     .btnFloat button:hover {
@@ -527,4 +538,8 @@ form input:focus, form select:focus, form textarea:focus {
 
 .block {
     display: block !important;
+}
+
+.cont > * {
+    width: 100% !important;
 }

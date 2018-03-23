@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/styles.css">
     
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css">
+
 </head>
 <body>
     <div id="main">
@@ -37,7 +39,7 @@
             <div id="titleSection" class="container-fluid">
                 <div class="row">
                     <div class="col-xs-6 left">
-                        <h2>Operadores</h2>
+                        <h2>Fletes</h2>
                     </div>
                     <div class="col-xs-6 right">
                         <button type="button" id="btnMenu"><i class="fas fa-bars"></i></button>
@@ -50,11 +52,12 @@
             <div id="subtitleSection" class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 col-sm-6 left">
-                        <h3>Lista de Operadores</h3>
+                        <h3>Lista de Fletes</h3>
                     </div>
                     <div class="col-xs-12 col-sm-6 right">
                         <div class="btnFloat">
-                            <button type="button" id="btnShowAddOperador" class="btnAdd"><span><i class="fas fa-plus"></i></span><span>Agregar</span></button>
+                            <button type="button" id="btnShowAdd" class="btnAdd"><span><i class="fas fa-plus"></i></span><span>Agregar</span></button>
+                            <button type="button" id="btnShowSearch" class="btnSearch"><span><i class="fas fa-search"></i></span><span>Buscar</span></i></button>
                         </div>
                     </div>
                 </div>
@@ -63,29 +66,42 @@
             <div id="tableSection" class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 table-responsive">
-                        <table class="table table-hover" id="tableOperadores" class="display" style="width:100%">
+                        <table class="table table-hover" id="tableFletes" class="display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>+</th>
                                     <th class="none">ID</th>
-                                    <th>ID</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Licencia</th>
+                                    <th>Folio</th>
+                                    <th>Trailer</th>
+                                    <th>Operador</th>
+                                    <th>Fecha</th>
+                                    <th class="none">Cargas</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
 
-                                <tr data-child-nss="1234567" data-child-curp="lacurpe" data-child-direccion="calle 1" data-child-telefono="mitel">
+                                <tr>
                                     <td class="details-control"><i class="fas fa-plus-square"></i></td>
                                     <td class="none">1</td>
-                                    <td>FL</td>
-                                    <td>Nombre</td>
-                                    <td>Me apellido</td>
-                                    <td>jujuju</td>
-                                    <td><button type="button" class="btnEdit btnShowEditOperador"><i class="fas fa-pencil-alt"></i></button><button type="button" class="btnDelete btnShowDeleteOperador"><i class="fas fa-trash-alt"></i></button></td>
+                                    <td>FoliO</td>
+                                    <td>traileer</td>
+                                    <td>opeerador</td>
+                                    <td>23/04/2018</td>
+                                    <td class="none">remolque 1: Barco 1 tiene un millon de toneladas de pescado y el barco 2 tiene 2 millones de toneladas de pescado porfavor</td>
+                                    <td><button type="button" class="btnPin btnShowEditFleteEscala"><i class="fas fa-map-marker"></i></button><button type="button" class="btnEdit btnShowEditFlete"><i class="fas fa-pencil-alt"></i></button><button type="button" class="btnDelete btnShowDeleteFlete"><i class="fas fa-trash-alt"></i></button></td>
                                 </tr>
+
+                                <tr>
+                                        <td class="details-control"><i class="fas fa-plus-square"></i></td>
+                                        <td class="none">1</td>
+                                        <td>FoliO</td>
+                                        <td>traileer</td>
+                                        <td>opeerador</td>
+                                        <td>24/04/2018</td>
+                                        <td class="none">remolque 1: Barco 1 tiene un millon de toneladas de pescado y el barco 2 tiene 2 millones de toneladas de pescado porfavor</td>
+                                        <td><button type="button" class="btnPin btnShowEditFleteEscala"><i class="fas fa-map-marker"></i></button><button type="button" class="btnEdit btnShowEditFlete"><i class="fas fa-pencil-alt"></i></button><button type="button" class="btnDelete btnShowDeleteFlete"><i class="fas fa-trash-alt"></i></button></td>
+                                    </tr>
 
                             </tbody>
                         </table>
@@ -210,7 +226,9 @@
     <script src="scripts/scripts.js"></script>
 
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
     
-    <script src="scripts/operadoresScript.js"></script>
+
+    <script src="scripts/fletesScript.js"></script>
 </body>
 </html>

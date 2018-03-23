@@ -24,8 +24,8 @@ $(document).ready(function() {
 
 /* Row details */
 function format(dataSource){
-    return '<div class="container-fluid">'+
-    '<div class="row table-details" style="width:100%">'+
+    return '<div class="cont">'+
+    '<div class="row table-details">'+
         '<div class="col-xs-12 col-sm-6">'+
             '<p>'+'<span>NSS: </span>'+dataSource[0]+'</p>'+
             '<p>'+'<span>CURP: </span>'+dataSource[1]+'</p>'+
@@ -43,7 +43,12 @@ $(function(){
     //dar formato a la tabla
     var table = $('#tableOperadores').DataTable({
         language: dataTableLanguage,
-        order: [[ 3, "asc" ]]
+        order: [[ 3, "asc" ]],
+        columnDefs: [{
+            className: 'control',
+            orderable: false,
+            targets: 0
+        }]
     });
 
     //listener para abrir y cerrar detalles
