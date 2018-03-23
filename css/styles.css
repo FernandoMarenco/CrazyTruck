@@ -1,0 +1,530 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700');
+
+body {
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    background-color: #FFF;
+    color: #000;
+}
+
+h1, h2, h3, h4, p, span {
+    margin: 0;
+    padding: 0;
+}
+
+button {
+    background: unset;
+    border: none;
+    outline: none;
+    padding: 0;
+}
+
+#main {
+    margin: 0 auto;
+}
+
+header {
+    position: relative;
+    display: block;
+}
+
+#logoSection {
+    position: relative;
+    display: block;
+}
+
+#logo {
+    position: relative;
+    display: block;
+    text-align: left;
+}
+
+#logo a {
+    position: relative;
+    display: inline-block;
+    background: url("../images/crazytruck-logo.png") no-repeat -19px 0px;
+    color: #000;
+    text-decoration: none;
+    width: 88px;
+    height: 30px;
+    margin: 10px 0px;
+}
+
+#logo a h1 {
+    font-size: 22px;
+    font-weight: bold;
+    visibility: hidden;
+}
+
+#userOptions {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+}
+
+#userOptions > * {
+    position: relative;
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+#userOptions #userName {
+    display: none;
+}
+
+#userOptions button {
+    font-size: 22px;
+    margin-left: 5px;
+}
+
+#userOptions button:hover {
+    color: #DD1E1B;
+}
+
+#menu {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+#menuSection {
+    position: relative;
+    display: none;
+    background-color: #0062DA;
+    text-align: center;
+    z-index: 1;
+}
+
+#menuSection a {
+    position: relative;
+    display: block;
+    text-transform: uppercase;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 6px 20px;
+}
+
+#menuSection a:hover, .menuSelected {
+    background-color: #006DF0;
+}
+
+#titleSection {
+    position: relative;
+    display: block;
+    background-color: #006DF0;
+    color: #FFF;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+#titleSection h2 {
+    font-size: 22px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 4px 0;
+}
+
+#titleSection button {
+    font-size: 22px;
+    margin-top: 4px;
+}
+
+#titleSection button:hover {
+    color: #FCB535;
+}
+
+#content {
+    /*height: 1500px;*/
+}
+
+#content > div:not(#menu) {
+    position: relative;
+    display: block;
+    margin-top: 10px;
+}
+
+#subtitleSection > div {
+    border-bottom: 3px solid #FCB535;
+}
+
+#subtitleSection h3 {
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Button edit and delete styles */
+.table-responsive {
+    border: none;
+}
+
+table button {
+    position: relative;
+    display: inline-block;
+    background: unset;
+    margin-right: 8px;
+    top: 0;
+    transition: all 0.2s ease;
+}
+table button:hover {
+    top: -2px;
+}
+
+table button:first-child {
+    color: #0062DA;
+}
+
+table button:last-child {
+    color: #DD1E1B;
+}
+/* End button edit and delete styles */
+
+/* DataTables styles */
+td.details-control {
+    text-align: center;
+    color: #50D16E;
+    cursor: pointer;
+}
+tr.shown td.details-control {
+    color: #DD1E1B;
+}
+
+.table-details span {
+    font-weight: bold;
+}
+
+table.dataTable {
+    clear: both;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.dataTables_wrapper {
+    position: relative;
+    clear: both;
+    zoom: 1;
+}
+
+.dataTables_wrapper::after {
+    visibility: hidden;
+    display: block;
+    content: "";
+    clear: both;
+    height: 0;
+}
+
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    float: none;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_paginate {
+    float: none;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    outline: none;
+    padding: 2px;
+    border: 1px solid #CECECE;
+    border-radius: 2px;
+}
+
+
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 6px;
+    outline: none;
+    padding: 2px;
+    border: 1px solid #CECECE;
+    border-radius: 2px;
+    width: 200px;
+}
+
+.dataTables_wrapper .dataTables_length select:hover,
+.dataTables_wrapper .dataTables_filter input:hover {
+    border: 1px solid #AFAFAF;
+}
+
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    color: #FFF;
+    padding: 0px 10px;
+    margin: 0px 2px;
+    background-color: #0F7CFF;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 3px;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+    background-color: #006DF0;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background-color: #004EAC;
+    cursor: default;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+    background-color: #CECECE;
+    cursor: default;
+}
+
+/* End dataTables styles*/
+
+/* Button accept and cancel styles */
+.btnAccept, .btnCancel {
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 2px 10px;
+    border-radius: 5px;
+}
+
+.btnAccept {
+    background-color: #50D16E;
+    border-bottom: 3px solid #1A7F06;
+}
+
+.btnCancel {
+    background-color: #DD1E1B;
+    border-bottom: 3px solid #961310;
+}
+
+.btnAccept span:first-child, .btnCancel span:first-child {
+    margin-right: 5px;
+}
+/* End button add and cancel styles */
+
+/* Button add and search styles */
+.btnFloat {
+    position: fixed;
+    display: block;
+    bottom: 20px;
+    right: 20px;
+}
+
+.btnFloat button {
+    width: 50px;
+    height: 50px;
+    font-size: 24px;
+    border-radius: 50%;
+    color: #FFF;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+.btnFloat button:hover {
+    box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.6);
+}
+
+.btnFloat button span:last-child {
+    display: none;
+}
+
+.btnFloat .btnAdd {
+    background-color: #50D16E;
+}
+
+.btnFloat .btnSearch {
+    background-color: #0062DA;
+}
+/* End button add and search styles*/
+
+/* Form styles */
+.form-group {
+    text-align: center;
+}
+
+.form-group label {
+    text-align: left;
+}
+
+form label {
+    position: relative;
+    display: block;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+form textarea {
+    resize: vertical;
+    min-height: 76px;
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    border: 2px solid #EAEAEA;
+    border-radius: 3px;
+    padding: 6px;
+    outline: none;
+    margin-bottom: 10px;
+}
+form input:hover, form select:hover, form textarea:hover {
+    border: 2px solid #DADADA;
+}
+form input:focus, form select:focus, form textarea:focus {
+    border: 2px solid #CECECE;
+}
+/* End form styles */
+
+/* Modal styles */
+.modal-header > button {
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    color: #000;
+}
+
+.modal-header > button:hover {
+    color: #525252;
+}
+
+.modal-header h4 {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: bold;
+}
+/* End modal styles */
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    
+    #logo a {
+        background-position: 0px 0px;
+        width: 128px;
+        height: 60px;
+        margin: 10px 0px;
+    }
+
+    #userOptions {
+        margin-top: 24px;
+    }
+
+    #userOptions #userName {
+        display: inline-block;
+    }
+
+    #menuSection {
+        display: block;
+    }
+
+    #menuSection a {
+        display: inline-block;
+    }
+
+    #titleSection {
+        height: 15px;
+    }
+
+    #titleSection h2, #titleSection button {
+        display: none;
+    }
+
+
+    .dataTables_wrapper .dataTables_info {
+        clear: both;
+        float: left;
+    }
+    
+    .dataTables_wrapper .dataTables_paginate {
+        float: right;
+        text-align: right;
+    }
+
+    .dataTables_wrapper .dataTables_length {
+        clear: both;
+        float: left;
+    }
+
+    .dataTables_wrapper .dataTables_filter {
+        float: right;
+        text-align: right;
+    }
+
+    .btnFloat {
+        position: relative;
+        display: block;
+        top: unset;
+        bottom: unset;
+        right: unset;
+        left: unset;
+        margin-bottom: 6px;
+    }
+    
+    .btnFloat button {
+        width: auto;
+        height: auto;
+        border-radius: 5px;
+        box-shadow: unset;
+        transition: none;
+        font-size: 16px;
+        font-weight: 600;
+        text-transform: uppercase;
+        padding: 2px 10px;
+        border-bottom: 3px solid #1A7F06;
+    }
+
+    .btnFloat button:hover {
+        box-shadow: unset;
+    }
+
+    .btnFloat button span:last-child {
+        display: inline-block;
+        margin-left: 5px;
+    }
+    
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+    #main .container-fluid .row:not(#modals) {
+        width: 960px;
+        margin: 0 auto;
+    }
+
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}
+
+/* Estilos auxiliares */
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+.center {
+    text-align: center;
+}
+
+.none {
+    display: none !important;
+}
+
+.block {
+    display: block !important;
+}
