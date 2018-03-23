@@ -34,7 +34,7 @@ $(function(){
                     } ).join('');
  
                     return data ?
-                        $('<div class="cont"/>').append( data ) :
+                        $('<div class="rowFletes"/>').append( data ) :
                         false;
                 },
                 type: 'column'

@@ -44,35 +44,62 @@ $(function(){
     var table = $('#tableOperadores').DataTable({
         language: dataTableLanguage,
         order: [[ 3, "asc" ]],
-        columnDefs: [{
-            className: 'control',
-            orderable: false,
-            targets: 0
-        }]
+
+        responsive: {
+            details: {
+                renderer: function ( api, rowIdx, columns ) {
+                    var data = $.map( columns, function ( col, i ) {
+                        return col.hidden ?
+                            '<div class="row table-details">'+
+                                '<div class="col-xs-12">'+
+                                    '<p>'+
+                                    '<span>'+col.title+': '+'</span> '+col.data+'</span>'+
+                                    '</p>'+
+                                '</div>'+
+                            '</div>' :
+                            '';
+                    } ).join('');
+ 
+                    return data ?
+                        $('<div class="rowOperadores"/>').append( data ) :
+                        false;
+                },
+                type: 'column'
+            }
+        },
+
+        columnDefs: [
+            {
+                //esconder columna id
+                targets: 1,
+                visible: false,
+                searchable: false
+            },
+            //dar prioridad a la columna opciones y mas informacion
+            { responsivePriority: 1, targets: -1 },
+            { responsivePriority: 1, targets: 0 }
+        ]
+
     });
 
     //listener para abrir y cerrar detalles
     $('#tableOperadores').on('click', 'td.details-control', function(){
-        var tr = $(this).closest('tr');
+        
+        var tr = $(this).parents('tr');
         var row = table.row(tr);
 
-        if(row.child.isShown()){
-            row.child.hide();
-            tr.removeClass('shown');
-
-            $(this).empty();
-            $(this).append('<i class="fas fa-plus-square"></i>');
-        } else {
-            row.child(format([
-                tr.data('child-nss'),
-                tr.data('child-curp'),
-                tr.data('child-direccion'),
-                tr.data('child-telefono')
-            ])).show();
+        if (row.child.isShown()) {
             tr.addClass('shown');
 
             $(this).empty();
             $(this).append('<i class="fas fa-minus-square"></i>');
+        }
+        else {
+            tr.removeClass('shown');
+
+            $(this).empty();
+            $(this).append('<i class="fas fa-plus-square"></i>');
+            
         }
     });
 });

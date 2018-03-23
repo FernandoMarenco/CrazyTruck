@@ -501,6 +501,9 @@ form input:focus, form select:focus, form textarea:focus {
         margin-left: 5px;
     }
     
+    .rowOperadores {
+        column-count: 2 !important;
+    }
 }
 
 /* Medium devices (desktops, 992px and up) */
@@ -510,7 +513,6 @@ form input:focus, form select:focus, form textarea:focus {
         width: 960px;
         margin: 0 auto;
     }
-
 
 }
 
@@ -540,6 +542,10 @@ form input:focus, form select:focus, form textarea:focus {
     display: block !important;
 }
 
-.cont > * {
+.rowOperadores {
+    column-count: 1;
+}
+
+.rowFletes > *, .rowOperadores > * {
     width: 100% !important;
 }
