@@ -5,6 +5,9 @@ $(document).ready(function() {
     //colorear tab
     $('#menuSection a').removeClass("menuSelected");
     $('#menuSection a:nth-child(4)').addClass("menuSelected");
+
+    //set titulo seccion
+    $('#titleSection h2').text("Operadores");
     
     /*//vaciar div modals
     $("#modals").empty();
@@ -39,7 +42,8 @@ $(function(){
 
     //dar formato a la tabla
     var table = $('#tableOperadores').DataTable({
-        language: dataTableLanguage
+        language: dataTableLanguage,
+        order: [[ 3, "asc" ]]
     });
 
     //listener para abrir y cerrar detalles

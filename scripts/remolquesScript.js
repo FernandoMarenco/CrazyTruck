@@ -3,7 +3,10 @@ $(document).ready(function() {
     //colorear tab
     $('#menuSection a').removeClass("menuSelected");
     $('#menuSection a:nth-child(3)').addClass("menuSelected");
-    
+
+    //set titulo seccion
+    $('#titleSection h2').text("Remolques");
+
     /*//vaciar div modals
     $("#modals").empty();
     
@@ -20,7 +23,8 @@ $(document).ready(function() {
 $(function(){
     //dar formato a la tabla
     var table = $('#tableRemolques').DataTable({
-        language: dataTableLanguage
+        language: dataTableLanguage,
+        order: [[ 1, "asc" ]]
     });
 });
 
@@ -160,7 +164,7 @@ $('.btnShowDeleteRemolque').on({
 
         //agregar boton eliminar
         $(modal+" .modal-footer button:first-child").remove();
-        $(modal+" .modal-footer").prepend('<button type="button" class="btnCancel" id="btnDeleteRemolque"><span><i class="fas fa-check"></i></span><span>Eliminar</span></button>');
+        $(modal+" .modal-footer").prepend('<button type="button" class="btnCancel" id="btnDeleteRemolque"><span><i class="fas fa-times"></i></span><span>Eliminar</span></button>');
 
         enableBtnDelete(idRemolque);
     }
@@ -191,7 +195,6 @@ function enableBtnDelete(idRemolque){
 
             });
 
-            //alert($(modal+' .formRemolque').serialize());
         }
     });
 }

@@ -15,8 +15,8 @@
         <header>
             <div id="logoSection" class="container-fluid">
                 <div class="row">
-                    <div class="col-xs-6 left">
-                        <h1>CrazyTruck</h1>
+                    <div class="col-xs-6 left" id="logo">
+                        <a href="index.html"><h1>CrazyTruck</h1></a>
                     </div>
                     <div class="col-xs-6 right" id="userOptions">
                         <span id="userID" class="none">0</span><span id="userName">Nombre usuario</span><button type="button" id="btnLogOut"><i class="fas fa-power-off"></i></button>
@@ -63,7 +63,7 @@
             <div id="tableSection" class="container-fluid">
                 <div class="row">
                     <div class="col-xs-12 table-responsive">
-                        <table class="table table-hover" id="tableRemolques">
+                        <table class="table table-hover" id="tableRemolques" class="display" style="width:100%">
                             <thead>
                                 <tr>
                                     <th class="none">ID</th>
@@ -73,24 +73,14 @@
                                 </tr>
                             </thead>
                             <tbody>
+
                                 <tr>
                                     <td class="none">1</td>
                                     <td>123456</td>
                                     <td>133</td>
                                     <td><button type="button" class="btnShowEditRemolque"><i class="fas fa-pencil-alt"></i></button><button type="button" class="btnShowDeleteRemolque"><i class="fas fa-trash-alt"></i></button></td>
                                 </tr>
-                                <tr>
-                                    <td class="none">2</td>
-                                    <td>55555</td>
-                                    <td>789</td>
-                                    <td><button type="button" class="btnShowEditRemolque"><i class="fas fa-pencil-alt"></i></button><button type="button" class="btnShowDeleteRemolque"><i class="fas fa-trash-alt"></i></button></td>
-                                </tr>
-                                <tr>
-                                    <td class="none">3</td>
-                                    <td>22222</td>
-                                    <td>4</td>
-                                    <td><button type="button" class="btnShowEditRemolque"><i class="fas fa-pencil-alt"></i></button><button type="button" class="btnShowDeleteRemolque"><i class="fas fa-trash-alt"></i></button></td>
-                                </tr>
+                                
                             </tbody>
                         </table>
                     </div>

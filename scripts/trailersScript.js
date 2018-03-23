@@ -1,13 +1,30 @@
 $(document).ready(function() {
 
+    //colorear tab
+    $('#menuSection a').removeClass("menuSelected");
+    $('#menuSection a:nth-child(2)').addClass("menuSelected");
+
+    //set titulo seccion
+    $('#titleSection h2').text("Trailers");
+    
+    /*//vaciar div modals
+    $("#modals").empty();
     //agregar modals
     $.get("modals/modalFormTrailer.html", function(html){
         $('#modals').append(html);
     });
     $.get("modals/modalDeleteTrailer.html", function(html){
         $('#modals').append(html);
-    });
+    });*/
 
+});
+
+$(function(){
+    //dar formato a la tabla
+    var table = $('#tableTrailers').DataTable({
+        language: dataTableLanguage,
+        order: [[ 1, "asc" ]]
+    });
 });
 
 $('#btnShowAddTrailer').on({
@@ -38,12 +55,13 @@ function enableBtnAdd(){
 
             //metodo post
             $.ajax({
-                url: '',
-                data: JSON.stringify({trailer:{
-                    matricula: $('#trailerMatricula').val(),
-                    modelo: $('#trailerModelo').val(),
-                    anio: $('#trailerAnio').val(),
-                    color: $('#trailerColor').val()
+                url: '/Trailers/agregar',
+                data: JSON.stringify({
+                    Trailer:{
+                        modelo: $('#trailerModelo').val(),
+                        anio: $('#trailerAnio').val(),
+                        matricula: $('#trailerMatricula').val(),
+                        color: $('#trailerColor').val()
                 }}),
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8'
@@ -57,11 +75,9 @@ function enableBtnAdd(){
             .fail(function() {
                 alert("error");
 
-                //cerrar modal
-                $(modal).modal('hide');
             });
 
-            alert($(modal+' .formTrailer').serialize());
+            //alert($(modal+' .formTrailer').serialize());
         }
     });
 }
@@ -72,16 +88,21 @@ $('.btnShowEditTrailer').on({
         //limpiar formulario
         $('.formTrailer input').val("");
 
-        //obtener valores de la tabla
-        var datos = [];
-        $(this).parents("tr").find("td").each(function(){
-            datos.push($(this).html());
-        });
+        //obtener valores de la tabla y los guarda en variables
+        var row = $(this).parents("tr").find("td");
+
+        var id = row.eq(0).text(); //id
+        var modelo = row.eq(1).text(); //modelo
+        var anio = row.eq(2).text(); //anio
+        var matricula = row.eq(3).text(); //matricula
+        var color = row.eq(4).text(); //color
 
         //llenar formulario
-        $('.formTrailer input').each(function(index, val){
-            $(this).val(datos[index]);
-        })
+        var idTrailer = id;
+        $('#trailerModelo').val(modelo);
+        $('#trailerAnio').val(anio);
+        $('#trailerMatricula').val(matricula);
+        $('#trailerColor').val(color);
 
         //abrir modal
         var modal = "#modalFormTrailer";
@@ -94,21 +115,29 @@ $('.btnShowEditTrailer').on({
         $(modal+" .modal-footer button:first-child").remove();
         $(modal+" .modal-footer").prepend('<button type="button" class="btnAccept" id="btnEditTrailer"><span><i class="fas fa-check"></i></span><span>Editar</span></button>');
 
-        enableBtnEdit();
+        enableBtnEdit(idTrailer);
 
     }
 });
 
-function enableBtnEdit(){
+function enableBtnEdit(idTrailer){
     $('#btnEditTrailer').on({
         click: function(){
             var modal = "#modalFormTrailer";
 
             //metodo post
             $.ajax({
-                url: '',
-                data: $(modal+' .formTrailer').serialize(),
-                type: 'POST'
+                url: '/Trailers/editar',
+                data: JSON.stringify({
+                    Trailer:{
+                        id: idTrailer,
+                        modelo: $('#trailerModelo').val(),
+                        anio: $('#trailerAnio').val(),
+                        matricula: $('#trailerMatricula').val(),
+                        color: $('#trailerColor').val()
+                }}),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8'
             })
             .done(function() {
                 alert("success");
@@ -119,52 +148,47 @@ function enableBtnEdit(){
             .fail(function() {
                 alert("error");
 
-                //cerrar modal
-                $(modal).modal('hide');
             });
 
-            alert($(modal+' .formTrailer').serialize());
+            //alert($(modal+' .formTrailer').serialize());
         }
     });
 }
 
 $('.btnShowDeleteTrailer').on({
     click: function(){
-        //limpiar formulario
-        $('.formTrailer input').val("");
 
         //obtener id
-        var id = $(this).parents("tr").find("td").eq(0).text();
-
-        //setear id
-        $('.formTrailer input').val(id);
+        var idTrailer = $(this).parents("tr").find("td").eq(0).text();
 
         //abrir modal
         var modal = "#modalDeleteTrailer";
         $(modal).modal('show');
 
-        
         //cambiar titulo
         $(modal+" .modal-title").text("Eliminar trailer");
 
         //agregar boton eliminar
         $(modal+" .modal-footer button:first-child").remove();
-        $(modal+" .modal-footer").prepend('<button type="button" class="btnAccept" id="btnDeleteTrailer"><span><i class="fas fa-check"></i></span><span>Eliminar</span></button>');
+        $(modal+" .modal-footer").prepend('<button type="button" class="btnCancel" id="btnDeleteTrailer"><span><i class="fas fa-times"></i></span><span>Eliminar</span></button>');
 
-        enableBtnDelete();
+        enableBtnDelete(idTrailer);
     }
 });
 
-function enableBtnDelete(){
+function enableBtnDelete(idTrailer){
     $('#btnDeleteTrailer').on({
         click: function(){
             var modal = "#modalDeleteTrailer";
 
             //metodo post
             $.ajax({
-                url: '',
-                data: $(modal+' .formTrailer').serialize(),
-                type: 'POST'
+                url: '/Trailers/eliminar',
+                data: JSON.stringify({
+                    id: idTrailer
+                }),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8'
             })
             .done(function() {
                 alert("success");
@@ -175,11 +199,8 @@ function enableBtnDelete(){
             .fail(function() {
                 alert("error");
 
-                //cerrar modal
-                $(modal).modal('hide');
             });
 
-            alert($(modal+' .formTrailer').serialize());
         }
     });
 }
