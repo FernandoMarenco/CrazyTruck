@@ -117,7 +117,7 @@ $('#btnShowAddOperador').on({
         //cambiar titulo
         $(modal+" .modal-title").text("Agregar operador");
 
-        //agregar boton editar
+        //agregar boton añadir
         $(modal+" .modal-footer button:first-child").remove();
         $(modal+" .modal-footer").prepend('<button type="button" class="btnAccept" id="btnAddOperador"><span><i class="fas fa-check"></i></span><span>Agregar</span></button>');
 

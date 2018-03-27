@@ -24,28 +24,29 @@
             </div>
         </header>
 
-        <div id="content">
-            <div id="menu">
-                <nav id="menuSection" class="container-fluid">
-                    <div class="row">
-                        <a href="fletes.html">Fletes</a>
-                        <a href="trailers.html">Trailers</a>
-                        <a href="remolques.html">Remolques</a>
-                        <a href="operadores.html">Operadores</a>
+        <div id="menu">
+            <nav id="menuSection" class="container-fluid">
+                <div class="row">
+                    <a href="fletes.html">Fletes</a>
+                    <a href="trailers.html">Trailers</a>
+                    <a href="remolques.html">Remolques</a>
+                    <a href="operadores.html">Operadores</a>
+                </div>
+            </nav>
+            <div id="titleSection" class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-6 left">
+                        <h2>Trailers</h2>
                     </div>
-                </nav>
-                <div id="titleSection" class="container-fluid">
-                    <div class="row">
-                        <div class="col-xs-6 left">
-                            <h2>Trailers</h2>
-                        </div>
-                        <div class="col-xs-6 right">
-                            <button type="button" id="btnMenu"><i class="fas fa-bars"></i></button>
-                        </div>
+                    <div class="col-xs-6 right">
+                        <button type="button" id="btnMenu"><i class="fas fa-bars"></i></button>
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div id="content">
+            
             <div id="subtitleSection" class="container-fluid">
                 <div class="row">
                     <div class="col-xs-10 col-sm-6 left">
@@ -89,83 +90,84 @@
                     </div>
                 </div>
             </div>
-        </div>
 
+            <div id="modals">
 
-        <div id="modals">
-
-            <!-- Modal form -->
-            <div class="modal fade" id="modalFormTrailer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                            <button type="button" class="close right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+                <!-- Modal form -->
+                <div class="modal fade" id="modalFormTrailer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                <button type="button" class="close right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <form action="#" method="post" class="formTrailer">
+                                        <div class="col-xs-12">
+                
+                                            <div class="form-group">
+                                                <label for="trailerModelo">Modelo:</label>
+                                                <input type="text" name="trailerModelo" id="trailerModelo">
+                                            </div>
+                
+                                            <div class="form-group">
+                                                <label for="trailerAnio">Año:</label>
+                                                <input type="number" name="trailerAnio" id="trailerAnio">
+                                            </div>
+                
+                                            <div class="form-group">
+                                                <label for="trailerMatricula">Matrícula:</label>
+                                                <input type="text" name="trailerMatricula" id="trailerMatricula">
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="trailerColor">Color:</label>
+                                                <input type="text" name="trailerColor" id="trailerColor">
+                                            </div>
+                
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btnAccept"><span><i class="fas fa-check"></i></span><span>Aceptar</span></button>
+                                <button type="button" class="btnCancel" data-dismiss="modal"><span><i class="fas fa-times"></i></span><span>Cancelar</span></button>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <form action="#" method="post" class="formTrailer">
-                                    <div class="col-xs-12">
-            
-                                        <div class="form-group">
-                                            <label for="trailerModelo">Modelo:</label>
-                                            <input type="text" name="trailerModelo" id="trailerModelo">
-                                        </div>
-            
-                                        <div class="form-group">
-                                            <label for="trailerAnio">Año:</label>
-                                            <input type="number" name="trailerAnio" id="trailerAnio">
-                                        </div>
-            
-                                        <div class="form-group">
-                                            <label for="trailerMatricula">Matrícula:</label>
-                                            <input type="text" name="trailerMatricula" id="trailerMatricula">
-                                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Modal delete -->
+                <div class="modal fade" id="modalDeleteTrailer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                <button type="button" class="close right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <form action="#" method="post" class="formTrailer">
                                         
-                                        <div class="form-group">
-                                            <label for="trailerColor">Color:</label>
-                                            <input type="text" name="trailerColor" id="trailerColor">
+                                        <div class="col-xs-12">
+                                            <p>Esta seguro de eliminar trailer</p>
                                         </div>
-            
-                                    </div>
-                                </form>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btnAccept"><span><i class="fas fa-check"></i></span><span>Aceptar</span></button>
-                            <button type="button" class="btnCancel" data-dismiss="modal"><span><i class="fas fa-times"></i></span><span>Cancelar</span></button>
+                            <div class="modal-footer">
+                                <button type="button" class="btnAccept" id="btnDeleteTrailer"><span><i class="fas fa-check"></i></span><span>Eliminar</span></button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-
-            <!-- Modal delete -->
-            <div class="modal fade" id="modalDeleteTrailer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                            <button type="button" class="close right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="row">
-                                <form action="#" method="post" class="formTrailer">
-                                    
-                                    <div class="col-xs-12">
-                                        <p>Esta seguro de eliminar trailer</p>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btnAccept" id="btnDeleteTrailer"><span><i class="fas fa-check"></i></span><span>Eliminar</span></button>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>
+
 
 
     </div>

@@ -1,0 +1,35 @@
+<!-- Modal form -->
+<div class="modal fade" id="modalFormCarga" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                <button type="button" class="close right" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="fas fa-times"></i></span></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form action="#" method="post" class="formCarga">
+                        <div class="col-xs-12">
+
+                            <div class="form-group">
+                                <label for="cargaDescripcion">Descripción:</label>
+                                <textarea rows="3" name="cargaDescripcion" id="cargaDescripcion"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="cargaPeso">Peso:</label>
+                                <input type="number" name="cargaPeso" id="cargaPeso">
+                            </div>
+
+                            <p>Esta seguro de eliminar carga</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btnAccept"><span><i class="fas fa-check"></i></span><span>Aceptar</span></button>
+                <button type="button" class="btnCancel" data-dismiss="modal"><span><i class="fas fa-times"></i></span><span>Cancelar</span></button>
+            </div>
+        </div>
+    </div>
+</div>
