@@ -64,17 +64,16 @@ function enableBtnAdd(){
                         color: $('#trailerColor').val()
                 }}),
                 type: 'POST',
-                contentType: 'application/json; charset=utf-8'
-            })
-            .done(function() {
-                alert("success");
+                contentType: 'application/json; charset=utf-8',
+                success: function() {
+                    alert("success");
 
-                //cerrar modal
-                $(modal).modal('hide');
-            })
-            .fail(function() {
-                alert("error");
-
+                    //cerrar modal
+                    $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
+                }
             });
 
             //alert($(modal+' .formTrailer').serialize());
@@ -137,17 +136,16 @@ function enableBtnEdit(idTrailer){
                         color: $('#trailerColor').val()
                 }}),
                 type: 'POST',
-                contentType: 'application/json; charset=utf-8'
-            })
-            .done(function() {
-                alert("success");
+                contentType: 'application/json; charset=utf-8',
+                success: function() {
+                    alert("success");
 
-                //cerrar modal
-                $(modal).modal('hide');
-            })
-            .fail(function() {
-                alert("error");
-
+                    //cerrar modal
+                    $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
+                }
             });
 
             //alert($(modal+' .formTrailer').serialize());
@@ -183,22 +181,18 @@ function enableBtnDelete(idTrailer){
 
             //metodo post
             $.ajax({
-                url: '/Trailers/eliminar',
-                data: JSON.stringify({
-                    id: idTrailer
-                }),
+                url: '/Trailers/eliminar?idTrailer='+idTrailer,
                 type: 'POST',
-                contentType: 'application/json; charset=utf-8'
-            })
-            .done(function() {
-                alert("success");
+                contentType: 'application/json; charset=utf-8',
+                success: function() {
+                    alert("success");
 
-                //cerrar modal
-                $(modal).modal('hide');
-            })
-            .fail(function() {
-                alert("error");
-
+                    //cerrar modal
+                    $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
+                }
             });
 
         }

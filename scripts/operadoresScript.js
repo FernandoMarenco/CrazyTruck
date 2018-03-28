@@ -1,4 +1,5 @@
 //https://stackoverflow.com/questions/5980389/proper-way-to-use-ajax-post-in-jquery-to-pass-model-from-strongly-typed-mvc3-vie
+//https://stackoverflow.com/questions/5021552/how-to-reference-a-css-file-on-a-razor-view
 
 $(document).ready(function() {
 
@@ -125,17 +126,16 @@ function enableBtnAdd(){
                     }
                 }),
                 type: 'POST',
-                contentType: 'application/json; charset=utf-8'
-            })
-            .done(function() {
-                alert("success");
+                contentType: 'application/json; charset=utf-8',
+                success: function() {
+                    alert("success");
 
-                //cerrar modal
-                $(modal).modal('hide');
-            })
-            .fail(function() {
-                alert("error");
-
+                    //cerrar modal
+                    $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
+                }
             });
 
             //alert($(modal+' .formOperador').serialize());
@@ -214,17 +214,16 @@ function enableBtnEdit(idOperador){
                     }
                 }),
                 type: 'POST',
-                contentType: 'application/json; charset=utf-8'
-            })
-            .done(function() {
-                alert("success");
+                contentType: 'application/json; charset=utf-8',
+                success: function(){
+                    alert("success");
 
-                //cerrar modal
-                $(modal).modal('hide');
-            })
-            .fail(function() {
-                alert("error");
-
+                    //cerrar modal
+                    $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
+                }
             });
 
         }
@@ -263,7 +262,13 @@ function enableBtnDelete(idOperador){
                 type: 'POST',
                 contentType: 'application/json; charset=utf-8',
                 success: function(){
+                    alert("success");
+
+                    //cerrar modal
                     $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
                 }
             });
         }

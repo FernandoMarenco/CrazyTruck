@@ -64,17 +64,16 @@ function enableBtnAdd(){
                     }
                 }),
                 type: 'POST',
-                contentType: 'application/json; charset=utf-8'
-            })
-            .done(function() {
-                alert("success");
+                contentType: 'application/json; charset=utf-8',
+                success: function() {
+                    alert("success");
 
-                //cerrar modal
-                $(modal).modal('hide');
-            })
-            .fail(function() {
-                alert("error");
-
+                    //cerrar modal
+                    $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
+                }
             });
 
         }
@@ -131,17 +130,16 @@ function enableBtnEdit(idRemolque){
                     }
                 }),
                 type: 'POST',
-                contentType: 'application/json; charset=utf-8'
-            })
-            .done(function() {
-                alert("success");
+                contentType: 'application/json; charset=utf-8',
+                success: function() {
+                    alert("success");
 
-                //cerrar modal
-                $(modal).modal('hide');
-            })
-            .fail(function() {
-                alert("error");
-
+                    //cerrar modal
+                    $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
+                }
             });
 
             //alert($(modal+' .formRemolque').serialize());
@@ -177,22 +175,18 @@ function enableBtnDelete(idRemolque){
 
             //metodo post
             $.ajax({
-                url: '/Remolques/eliminar',
-                data: JSON.stringify({
-                    id: idRemolque
-                }),
+                url: '/Remolques/eliminar?idRemolque='+idRemolque,
                 type: 'POST',
-                contentType: 'application/json; charset=utf-8'
-            })
-            .done(function() {
-                alert("success");
+                contentType: 'application/json; charset=utf-8',
+                success: function() {
+                    alert("success");
 
-                //cerrar modal
-                $(modal).modal('hide');
-            })
-            .fail(function() {
-                alert("error");
-
+                    //cerrar modal
+                    $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
+                }
             });
 
         }
