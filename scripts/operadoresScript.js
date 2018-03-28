@@ -259,24 +259,13 @@ function enableBtnDelete(idOperador){
 
             //metodo post
             $.ajax({
-                url: '/Operadores/eliminar',
-                data: JSON.stringify({
-                    id: idOperador
-                }),
+                url: '/Operadores/eliminar?idOperador='+idOperador,
                 type: 'POST',
-                contentType: 'application/json; charset=utf-8'
-            })
-            .done(function() {
-                alert("success");
-
-                //cerrar modal
-                $(modal).modal('hide');
-            })
-            .fail(function() {
-                alert("error");
-
+                contentType: 'application/json; charset=utf-8',
+                success: function(){
+                    $(modal).modal('hide');
+                }
             });
-
         }
     });
 }
