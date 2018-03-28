@@ -22,21 +22,6 @@ $(document).ready(function() {
 
 });
 
-/* Row details */
-function format(dataSource){
-    return '<div class="cont">'+
-    '<div class="row table-details">'+
-        '<div class="col-xs-12 col-sm-6">'+
-            '<p>'+'<span>NSS: </span>'+dataSource[0]+'</p>'+
-            '<p>'+'<span>CURP: </span>'+dataSource[1]+'</p>'+
-            '<p>'+'<span>Teléfono: </span>'+dataSource[3]+'</p>'+
-        '</div>'+
-        '<div class="col-xs-12 col-sm-6">'+
-            '<p>'+'<span>Dirección: </span>'+dataSource[2]+'</p>'+
-        '</div>'+
-    '</div>'+
-    '</div>';
-}
 
 $(function(){
 
@@ -69,12 +54,6 @@ $(function(){
         },
 
         columnDefs: [
-            {
-                //esconder columna id
-                targets: 1,
-                visible: false,
-                searchable: false
-            },
             //dar prioridad a la columna opciones y mas informacion
             { responsivePriority: 1, targets: -1 },
             { responsivePriority: 1, targets: 0 }
@@ -179,23 +158,24 @@ $('.btnShowEditOperador').on({
         var apellido = row.eq(4).text(); //apellido
         var licencia = row.eq(5).text(); //licencia
 
-        var tr = $(this).parents("tr");
+        //var tr = $(this).parents("tr");
 
-        var nss = tr.data('child-nss'); //nss
-        var curp = tr.data('child-curp'); //curp
-        var direccion = tr.data('child-direccion'); //direccion
-        var telefono = tr.data('child-telefono'); //telefono
+        var nss = row.eq(6).text();; //nss
+        var curp = row.eq(7).text(); //curp
+        var telefono = row.eq(8).text(); //telefono
+        var direccion = row.eq(9).text(); //direccion
 
         //llenar formulario
         var idOperador = id;
         $('#operadorNombre').val(nombre);
         $('#operadorApellido').val(apellido);
-        $('#operadorLicencia').val(licencia);
+        $('#operadorNumLicencia').val(licencia);
 
         $('#operadorNss').val(nss);
         $('#operadorCurp').val(curp);
-        $('#operadorDireccion').val(direccion);
         $('#operadorTelefono').val(telefono);
+        $('#operadorDireccion').val(direccion);
+        console.log(telefono)
 
         //abrir modal
         var modal = "#modalFormOperador";

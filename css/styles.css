@@ -241,6 +241,10 @@ tr.shown td.details-control {
     color: #DD1E1B;
 }
 
+.table-details:first-child {
+    display: none;
+}
+
 .table-details span {
     font-weight: bold;
 }

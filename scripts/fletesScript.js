@@ -40,12 +40,6 @@ $(function(){
         },
 
         columnDefs: [
-            {
-                //esconder columna id
-                targets: 1,
-                visible: false,
-                searchable: false
-            },
             //dar prioridad a la columna opciones y mas informacion
             { responsivePriority: 1, targets: -1 },
             { responsivePriority: 1, targets: 0 }
@@ -259,13 +253,37 @@ function setBtnEdit(){
             var idRemolque = $(this).parents('.selectRemolque').find('select').attr('id');
             var rowIndex = $(this).parents('tr').index();
             //console.log(rowIndex);
-            
-            //enableBtnEditCargaTemp(idRemolque, rowIndex);
+            enableBtnEditCargaTemp(idRemolque, rowIndex);
 
         }
     });
 }
 
+function enableBtnEditCargaTemp(idRemolque, rowIndex, carga){
+    $('#btnEditCargaTemp').on({
+        click: function(){
+            var modal = "#modalFormCarga";
+            var table1 = "#tableCargas1 tbody";
+            var table2 = "#tableCargas2 tbody";
+
+            //crear carga temporal
+            var carga = {descripcion: $('#cargaDescripcion').val(), peso: $('#cargaPeso').val()};
+
+            //editar de correspondiente arreglo
+            if(idRemolque == "fleteRemolque1"){
+                cargas1[rowIndex] = carga;
+                updateTable(table1, cargas1);
+            } else if(idRemolque == "fleteRemolque2"){
+                cargas2[rowIndex] = carga;
+                updateTable(table2, cargas2);
+            }
+
+            //cerrar modal
+            alert("Se edito "+carga);
+            $(modal).modal('hide');
+        }
+    });
+}
 
 
 function setBtnDelete(){
