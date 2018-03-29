@@ -260,6 +260,77 @@
                         </div>
                     </div>
                     
+                    <div class="col-xs-12 selectEscalas">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group">
+                                <p>Ruta:</p>
+                                <div id="mapRutas"></div>
+                            </div>
+                            
+                        </div>
+                        <div class="col-xs-12 col-sm-6" id="sectionEscalas">
+                            <div class="col-xs-6 left">
+                                <p>Lista de escalas:</p>
+                            </div>
+
+                            <div class="col-xs-6 right">
+                                <button type="button" class="btnAccept" id="btnShowAddEscala"><span><i class="fas fa-plus"></i></span><span>Agregar escala</span></button>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <div class="table-responsive">
+                                    <table class="table table-hover" id="tableEscalas">
+                                        <thead>
+                                            <tr>
+                                                <th>+</th>
+                                                <th class="none">ID</th>
+                                                <th class="none">Latitud</th>
+                                                <th class="none">Longitud</th>
+                                                <th>Nombre</th>
+                                                <th class="none">Descripción</th>
+                                                <th>Fecha</th>
+                                                <th>Hora</th>
+                                                <th>Opciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="details-control"><i class="fas fa-plus-square"></i></td>
+                                                <td class="none">EscalaID</td>
+                                                <td class="none">Lat</td>
+                                                <td class="none">Lon</td>
+                                                <td>nombre</td>
+                                                <td class="none">desripcion</td>
+                                                <td>fecha</td>
+                                                <td>hora</td>
+                                                <td class="optionsTable"><button type="button" class="btnEdit btnShowEditEscala"><i class="fas fa-pencil-alt"></i></button><button type="button" class="btnDelete btnShowDeleteEscala"><i class="fas fa-trash-alt"></i></button>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="details-control"><i class="fas fa-plus-square"></i></td>
+                                                <td class="none">EscalaID</td>
+                                                <td class="none">Lat</td>
+                                                <td class="none">Lon</td>
+                                                <td>nombre</td>
+                                                <td class="none">desripcion</td>
+                                                <td>fecha</td>
+                                                <td>hora</td>
+                                                <td class="optionsTable"><button type="button" class="btnEdit btnShowEditEscala"><i class="fas fa-pencil-alt"></i></button><button type="button" class="btnDelete btnShowDeleteEscala"><i class="fas fa-trash-alt"></i></button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+
+
                 </div>
             </div>
 
@@ -444,7 +515,13 @@
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
     
-
     <script src="scripts/fletesScript.js"></script>
+
+
+    
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC-EDS7zQdpHo6_AHGek-JCJcxj_t3o3tw" type="text/javascript"></script>
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+    <script src="scripts/mapScript.js" type="text/javascript"></script>
+
 </body>
 </html>

@@ -129,6 +129,7 @@ function enableBtnAdd(){
                 contentType: 'application/json; charset=utf-8',
                 success: function() {
                     alert("success");
+                    window.location.href = "/Operadores/Lista";
 
                     //cerrar modal
                     $(modal).modal('hide');
@@ -217,6 +218,7 @@ function enableBtnEdit(idOperador){
                 contentType: 'application/json; charset=utf-8',
                 success: function(){
                     alert("success");
+                    window.location.href = "/Operadores/Lista";
 
                     //cerrar modal
                     $(modal).modal('hide');
@@ -263,6 +265,7 @@ function enableBtnDelete(idOperador){
                 contentType: 'application/json; charset=utf-8',
                 success: function(){
                     alert("success");
+                    window.location.href = "/Operadores/Lista";
 
                     //cerrar modal
                     $(modal).modal('hide');

@@ -76,6 +76,8 @@ $('#subtitleSection #btnShowAdd').on({
         $('#addSection').show();
         $('#btnShowSearch').show();
         $('#subtitleSection h3').text("Agregar flete");
+
+        initMapRutas();
     }
 });
 

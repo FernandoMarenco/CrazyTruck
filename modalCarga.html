@@ -1,5 +1,5 @@
-<!-- Modal form -->
-<div class="modal fade" id="modalFormCarga" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- Modal form escala -->
+<div class="modal fade" id="modalFormEscala" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,20 +9,40 @@
             <div class="modal-body">
                 <div class="row">
                     <form action="#" method="post" class="formCarga">
-                        <div class="col-xs-12">
-
+                        
+                        <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
-                                <label for="cargaDescripcion">Descripción:</label>
-                                <textarea rows="3" name="cargaDescripcion" id="cargaDescripcion"></textarea>
+                                <label for="searchAddress">Buscar:</label>
+                                <input type="text" id="searchAddress" name="searchAddress" placeholder="Introduce una dirección o lugar">
+                                <div id="mapAdd"></div>
+                                <input type="text" id="escalaNombre">                 
                             </div>
-
-                            <div class="form-group">
-                                <label for="cargaPeso">Peso:</label>
-                                <input type="number" name="cargaPeso" id="cargaPeso">
-                            </div>
-
-                            <p>Esta seguro de eliminar carga</p>
+                            
                         </div>
+                        
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="escalaNombre">Nombre:</label>
+                                <input type="text" name="escalaNombre" id="escalaNombre">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="escalaLng">Descripción:</label>
+                                <textarea name="escalaDescripcion" id="escalaDescripcion" rows="3"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="escalaFecha">Fecha:</label>
+                                <input type="text" name="escalaFecha" id="escalaFecha">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="escalaHora">Hora:</label>
+                                <input type="text" name="escalaHora" id="escalaHora">
+                            </div>
+                                
+                        </div>
+
                     </form>
                 </div>
             </div>

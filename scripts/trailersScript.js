@@ -67,6 +67,7 @@ function enableBtnAdd(){
                 contentType: 'application/json; charset=utf-8',
                 success: function() {
                     alert("success");
+                    window.location.href = "/Trailers/Lista";
 
                     //cerrar modal
                     $(modal).modal('hide');
@@ -139,6 +140,7 @@ function enableBtnEdit(idTrailer){
                 contentType: 'application/json; charset=utf-8',
                 success: function() {
                     alert("success");
+                    window.location.href = "/Trailers/Lista";
 
                     //cerrar modal
                     $(modal).modal('hide');
@@ -186,6 +188,7 @@ function enableBtnDelete(idTrailer){
                 contentType: 'application/json; charset=utf-8',
                 success: function() {
                     alert("success");
+                    window.location.href = "/Trailers/Lista";
 
                     //cerrar modal
                     $(modal).modal('hide');

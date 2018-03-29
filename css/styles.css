@@ -137,10 +137,6 @@ header {
     color: #FCB535;
 }
 
-#content {
-    /*height: 1500px;*/
-}
-
 #content h3 {
     font-size: 20px;
     font-weight: bold;
@@ -175,8 +171,6 @@ header {
     margin-bottom: 10px;
 }
 
-
-
 #selectTrailer {
     border-left: 3px solid #F5D131;
     border-right: 3px solid #F5D131;
@@ -200,6 +194,39 @@ header {
 #remolque1, #remolque2 {
     display: none;
 }
+
+
+#mapAdd, #mapRutas {
+    margin: 0 auto;
+    width: 100%;
+    height: 500px;
+}
+
+#scales p {
+    position: relative;
+    display: block;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.selectEscalas > div:first-child {
+    border-left: 3px solid #B44877;
+    border-right: 3px solid #B44877;
+    padding-bottom: 15px;
+}
+
+.selectEscalas > div:last-child {
+    border-left: 3px solid #B44877;
+    border-right: 3px solid #B44877;
+}
+
+#sectionEscalas > div {
+    padding: 0;
+}
+
+
+
 
 /* Button edit and delete styles */
 .table-responsive {
@@ -403,10 +430,6 @@ table.dataTable {
     overflow: auto;
 }
 
-.form-group label {
-    text-align: left;
-}
-
 form label {
     position: relative;
     display: block;
@@ -516,6 +539,14 @@ form input:focus, form select:focus, form textarea:focus {
         border-right: none;
     }
 
+    .selectEscalas > div:first-child {
+        border-right: none;
+        padding-bottom: 0px;
+    }
+    
+    .selectEscalas > div:last-child {
+        border: none;
+    }
 
     .dataTables_wrapper .dataTables_info {
         clear: both;

@@ -67,6 +67,7 @@ function enableBtnAdd(){
                 contentType: 'application/json; charset=utf-8',
                 success: function() {
                     alert("success");
+                    window.location.href = "/Remolques/Lista";
 
                     //cerrar modal
                     $(modal).modal('hide');
@@ -133,6 +134,7 @@ function enableBtnEdit(idRemolque){
                 contentType: 'application/json; charset=utf-8',
                 success: function() {
                     alert("success");
+                    window.location.href = "/Remolques/Lista";
 
                     //cerrar modal
                     $(modal).modal('hide');
@@ -180,6 +182,7 @@ function enableBtnDelete(idRemolque){
                 contentType: 'application/json; charset=utf-8',
                 success: function() {
                     alert("success");
+                    window.location.href = "/Remolques/Lista";
 
                     //cerrar modal
                     $(modal).modal('hide');
