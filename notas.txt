@@ -1,0 +1,37 @@
+controller (Flete f)
+
+f.idTrailer
+f.idOperador
+f.idUsuario
+
+f.carga = new list<Carga>()
+    Carga: idRemolque, peso, descripcion
+
+
+//agregarFlete
+{
+    idTrailer: idT,
+    idOperador: idO,
+    idUsuario: idU,
+    carga: [
+        {idRemolque: idR,
+        peso: peso,
+        descripcion: descripcion},
+        {idRemolque: idR,
+        peso: peso,
+        descripcion: descripcion},
+        {idRemolque: idR,
+        peso: peso,
+        descripcion: descripcion},
+    ]
+    Escala {
+
+    }
+}
+
+//agregarEscala
+{
+    Escala {
+        datos aqui
+    }
+}

@@ -1,6 +1,6 @@
 <!-- Modal form escala -->
 <div class="modal fade" id="modalFormEscala" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
@@ -8,19 +8,31 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <form action="#" method="post" class="formCarga">
+                    <form action="#" method="post" class="formEscala">
                         
+                        <div class="col-xs-12">
+                                <p>Esta seguro de eliminar escala</p>
+                        </div>
+
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <label for="searchAddress">Buscar:</label>
                                 <input type="text" id="searchAddress" name="searchAddress" placeholder="Introduce una dirección o lugar">
                                 <div id="mapAdd"></div>
-                                <input type="text" id="escalaNombre">                 
                             </div>
                             
                         </div>
-                        
+
                         <div class="col-xs-12 col-sm-6">
+                            <div class="form-group">
+                                <label for="escalaLat">Latitud:</label>
+                                <input type="text" name="escalaLat" id="escalaLat">
+                            </div>
+                            <div class="form-group">
+                                <label for="escalaLng">Longitud:</label>
+                                <input type="text" name="escalaLng" id="escalaLng">
+                            </div>
+
                             <div class="form-group">
                                 <label for="escalaNombre">Nombre:</label>
                                 <input type="text" name="escalaNombre" id="escalaNombre">

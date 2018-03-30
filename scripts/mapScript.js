@@ -1,7 +1,10 @@
-var map;
+var mapAdd;
 var gMarker;
+var gInfoW;
 
-function initMap(){
+function initMapAdd(){
+    gMarker = null;
+
     var idMap = document.getElementById('mapAdd');
     var objMap = {
         center: {
@@ -11,9 +14,9 @@ function initMap(){
         zoom: 6,
         streetViewControl: false
     }
-    map = new google.maps.Map(idMap, objMap);
+    mapAdd = new google.maps.Map(idMap, objMap);
 
-    google.maps.event.addListener(map, "click", function(event){
+    google.maps.event.addListener(mapAdd, "click", function(event){
         //obtener lat y lng del click
         var coordenadas = event.latLng;
 
@@ -21,9 +24,10 @@ function initMap(){
         createMaker();
 
         //setear marcador
-        moveMarker(map, gMarker, coordenadas);
+        moveMarker(mapAdd, gMarker, coordenadas);
         console.log(coordenadas.lat() + " " +coordenadas.lng());
     });
+
 }
 
 //input on key Enter
@@ -48,9 +52,9 @@ $('#searchAddress').keypress(function(event){
                 createMaker();
 
                 //setear marcador
-                moveMarker(map, gMarker, coordenadas);
-                map.setCenter(coordenadas);
-                map.setZoom(18);
+                moveMarker(mapAdd, gMarker, coordenadas);
+                mapAdd.setCenter(coordenadas);
+                mapAdd.setZoom(18);
             }
             
         }
@@ -61,14 +65,11 @@ $('#searchAddress').keypress(function(event){
 function createMaker(){
     if(gMarker == undefined) {
         var objMarker = {
-            map: map,
+            map: mapAdd,
             animation: google.maps.Animation.DROP,
             draggable: true
         }
         gMarker = new google.maps.Marker(objMarker);
-
-        var gInfoW;
-        setListeners();
 
         console.log("se creo");
     } else {
@@ -83,12 +84,15 @@ function moveMarker(map, marker, coordenadas){
     //actualizar nombre escala
     getAddress(marker, function(location){
         document.getElementById("escalaNombre").value = location;
+        document.getElementById("escalaLat").value = round(coordenadas.lat(), 8);
+        document.getElementById("escalaLng").value = round(coordenadas.lng(), 8);
 
         //actualizar info window
         var objWindow = {
             content: "<div><p>"+location+"</p></div>"
         }
         gInfoW = new google.maps.InfoWindow(objWindow);
+        setListeners();
 
     });
     
@@ -98,13 +102,26 @@ function setListeners(){
     //addListener(objeto asociado, evento, funcion)
     google.maps.event.addListener(gMarker, "click", function(){
         gInfoW.close();
-        gInfoW.open(map, gMarker);
+        gInfoW.open(mapAdd, gMarker);
     });
 
     google.maps.event.addListener(gMarker, "dragend", function(){
-        var markerLatLgn = gMarker.getPosition();
+        var coordenadas = gMarker.getPosition();
 
-        console.log(markerLatLgn.lat()+" "+markerLatLgn.lng());
+        console.log(coordenadas.lat()+" "+coordenadas.lng());
+
+        getAddress(gMarker, function(location){
+            document.getElementById("escalaNombre").value = location;
+            document.getElementById("escalaLat").value = round(coordenadas.lat(), 8);
+            document.getElementById("escalaLng").value = round(coordenadas.lng(), 8);
+    
+            //actualizar info window
+            var objWindow = {
+                content: "<div><p>"+location+"</p></div>"
+            }
+            gInfoW = new google.maps.InfoWindow(objWindow);
+    
+        });
 
     });
 }
@@ -137,6 +154,8 @@ function resetMarker(marker){
 ((27.92516586 + 29.09746723) /2)=28.511317
 */
 
+var mapRutas;
+
 function initMapRutas(){
     var idMap = document.getElementById('mapRutas');
 
@@ -148,12 +167,12 @@ function initMapRutas(){
         zoom: 6,
         streetViewControl: false
     }
-    map = new google.maps.Map(idMap, objMap);
+    mapRutas = new google.maps.Map(idMap, objMap);
 
 
     //generar rutas objetos
     var objDR = {
-        map: map,
+        map: mapRutas,
         suppressMarkers: true,
         //markerOptions: {icon: "images/miniMarker.png"}
     }
@@ -164,10 +183,10 @@ function initMapRutas(){
     //tabla de escalas
     var idTable = "#tableEscalas";
 
-    createMarkers(map, idTable, function(markers){
+    createMarkers(mapRutas, idTable, function(markers){
         
         //inicializar cluster de markers
-        var markerCluster = new MarkerClusterer(map, markers, {
+        var markerCluster = new MarkerClusterer(mapRutas, markers, {
             //imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
             imagePath: "images/m"
         });

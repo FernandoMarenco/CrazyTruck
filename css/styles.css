@@ -196,13 +196,25 @@ header {
 }
 
 
-#mapAdd, #mapRutas {
+#mapRutas {
     margin: 0 auto;
     width: 100%;
     height: 500px;
+    margin-bottom: 15px;
 }
 
-#scales p {
+#mapAdd {
+    margin: 0 auto;
+    width: 100%;
+    height: 390px;
+    margin-bottom: 15px;
+}
+
+#scales {
+    display: none;
+}
+
+#scales .bold {
     position: relative;
     display: block;
     text-transform: uppercase;
@@ -213,7 +225,6 @@ header {
 .selectEscalas > div:first-child {
     border-left: 3px solid #B44877;
     border-right: 3px solid #B44877;
-    padding-bottom: 15px;
 }
 
 .selectEscalas > div:last-child {
@@ -266,10 +277,6 @@ td.details-control {
 }
 tr.shown td.details-control {
     color: #DD1E1B;
-}
-
-.table-details:first-child {
-    display: none;
 }
 
 .table-details span {
@@ -541,11 +548,21 @@ form input:focus, form select:focus, form textarea:focus {
 
     .selectEscalas > div:first-child {
         border-right: none;
-        padding-bottom: 0px;
     }
     
     .selectEscalas > div:last-child {
         border: none;
+    }
+
+    #mapRutas {
+        margin-bottom: 0px;
+    }
+    
+    #mapAdd {
+        margin: 0 auto;
+        width: 100%;
+        height: 390px;
+        margin-bottom: 0px;
     }
 
     .dataTables_wrapper .dataTables_info {
@@ -652,6 +669,14 @@ form input:focus, form select:focus, form textarea:focus {
     column-count: 1;
 }
 
-.rowFletes > *, .rowOperadores > * {
+.rowFletes > *, .rowOperadores > *, .rowEscalas > * {
     width: 100% !important;
+}
+
+.rowFletes > div.table-details:first-child, .rowOperadores > div.table-details:first-child {
+    display: none;
+}
+
+.rowEscalas > div.table-details:not(:last-child) {
+    display: none;
 }
