@@ -9,82 +9,66 @@ $(document).ready(function() {
 
     //btnShowEditEscala();
     //btnShowDeleteEscala();
+
+    //inicializar tabla de escalas
+    setDataTableEscalas();
 });
 
 $(function(){
-    
     //dar formato a la tabla
     var table = $('#tableFletes').DataTable({
         language: dataTableLanguage,
-        order: [[ 5, "desc" ]],
+        order: [[ 4, "desc" ]],
         
-        responsive: {
-            details: {
-                renderer: function ( api, rowIdx, columns ) {
-                    var data = $.map( columns, function ( col, i ) {
-                        return col.hidden ?
-                            '<div class="row table-details">'+
-                                '<div class="col-xs-12">'+
-                                    '<p>'+
-                                    '<span>'+col.title+': '+'</span> '+col.data+'</span>'+
-                                    '</p>'+
-                                '</div>'+
-                            '</div>' :
-                            '';
-                    } ).join('');
- 
-                    return data ?
-                        $('<div class="rowFletes"/>').append( data ) :
-                        false;
-                },
-                type: 'column'
-            }
-        },
-
-        columnDefs: [
-            //dar prioridad a la columna opciones y mas informacion
-            { responsivePriority: 1, targets: -1 },
-            { responsivePriority: 1, targets: 0 }
-        ]
-    });
-
-    //listener para abrir y cerrar detalles
-    $('#tableFletes').on('click', 'td.details-control', function(){
-
-        var tr = $(this).parents('tr');
-        var row = table.row(tr);
-
-        if (row.child.isShown()) {
-            tr.addClass('shown');
-
-            $(this).empty();
-            $(this).append('<i class="fas fa-minus-square"></i>');
-        }
-        else {
-            tr.removeClass('shown');
-
-            $(this).empty();
-            $(this).append('<i class="fas fa-plus-square"></i>');
-            
-        }
     });
 });
 
 //mostrar formulario agregar flete
 $('#subtitleSection #btnShowAdd').on({
     click: function(){
+        var section = "#addSection";
+        var info = "#generalInfo";
+        var scales = "#scales";
+
+        if(!$(section).find(info).length){
+            $(info).appendTo(section);
+            $(info).removeClass('clearInfo');
+        }
+
+        if(!$(section).find(scales).length){
+            $(scales).appendTo(section);
+            $(scales).removeClass('clearInfo block');
+        }
+
         $(this).hide();
         $('#tableSection').hide();
         $('#addSection').show();
         $('#btnShowSearch').show();
         $('#subtitleSection h3').text("Agregar flete");
 
-        //obtener listas
-        getTrailerList();
-        getOperadorList();
-        getRemolqueList();
+        //vaciar formulario
+        clearGeneralInfo();
     }
 });
+
+function clearGeneralInfo(){
+    getTrailerList();
+    getOperadorList();
+    getRemolqueList();
+
+    $('#generalInfo').show();
+    $('#scales').hide();
+    $('#remolque1').hide();
+    $('#remolque2').hide();
+    $('#selectTipoRemolque select').val("-1");
+
+    if(typeof(cargas1) != 'undefined') {
+        cargas1 = undefined;
+    }
+    if(typeof(cargas2) != 'undefined') {
+        cargas2 = undefined;
+    }
+}
 
 //mostrar tabla de fletes
 $('#subtitleSection #btnShowSearch').on({
@@ -254,15 +238,32 @@ function updateTable(table, cargas){
     }
 }
 
+var editFlete = false;
 $('.btnShowAddCargaTemp').on({
     click: function(){
+
         //limpiar formulario
         $('.formCarga input').val("");
         $('.formCarga textarea').val("");
 
-        //abrir modal
         var modal = "#modalFormCarga";
-        $(modal).modal('show');
+
+        //cerrar modal si se esta editando
+        if(($('#modalFormFlete').data('bs.modal') || {}).isShown){
+            editFlete = true;
+            $('#modalFormFlete').modal('hide');
+
+            //delay para abrir el modal
+            setTimeout(function() {
+                $(modal).modal({
+                    backdrop: 'static'
+                })
+            }, 400); //delay in miliseconds
+        } else {
+            editFlete = false;
+            //abrir modal
+            $(modal).modal('show');
+        }
 
         //cambiar titulo
         var nombreRemolque = $(this).parents('.selectRemolque').find('select option:selected').text();
@@ -302,11 +303,20 @@ function enableBtnAddCargaTemp(idRemolque){
             alert("Carga agregada");
             $(modal).modal('hide');
 
+            if(editFlete == true){
+                //delay para abrir el modal
+                setTimeout(function() {
+                    $('#modalFormFlete').modal({
+                        backdrop: 'static'
+                    })
+                }, 400); //delay in miliseconds
+                editFlete = false;
+            }
+
         }
     });
     
 }
-
 
 function setBtnEdit(){
     $('.btnShowEditCargaTemp').on({
@@ -437,7 +447,7 @@ $('#btnAddFlete').on({
             cargasList.push(c);
         });
 
-        console.log(cargasList);
+        //console.log(cargasList);
 
         //metodo post
         $.ajax({
@@ -457,7 +467,7 @@ $('#btnAddFlete').on({
 
                 $('#generalInfo').hide();
                 $('#scales').show();
-                setDataTableEscalas();
+                //setDataTableEscalas();
 
                 idFlete = data;
                 getEscalaList(idFlete);
@@ -467,10 +477,10 @@ $('#btnAddFlete').on({
                 
                 $('#generalInfo').hide();
                 $('#scales').show();
-                setDataTableEscalas();
+                //setDataTableEscalas();
 
                 idFlete = data;
-                getEscalaList(0);
+                getEscalaList(idFlete);
             }
         });
 
@@ -484,6 +494,235 @@ $('#btnAddFlete').on({
         );*/
     }
 });
+
+/* Edit generalInfo in table */
+$('.btnShowEditFlete').on({
+    click: function(){
+        var modal = "#modalFormFlete";
+        var info = "#generalInfo";
+
+        if(!$(modal).find(info).length){
+            $(info).appendTo(modal+' #modalContent');
+            $(info).addClass('clearInfo');
+        }
+        
+        //vaciar formulario
+        clearGeneralInfo();
+
+        //obtener valores de la tabla y los guarda en variables
+        var row = $(this).parents("tr").find("td");
+
+        idFlete = row.eq(1).text(); //id
+
+        //hacer metodo post para obtener flete
+        $.ajax({
+            url: '/Fletes/obtenerFlete?idFlete='+idFlete,
+            type: 'GET',
+            success: function(data){
+                alert("success");
+                var flete = JSON.parse(data);
+
+                $('#fleteTrailer option:selected').val(flete.idTrailer);
+                $('#fleteOperador option:selected').val(flete.idOperador);
+
+                //obtener cargas
+                var cargasList = flete.Carga;
+
+                //verificar cuando son 2 remolques
+                var corte;
+                $.each(cargasList, function(index, val){
+                    if(index != 0){
+                        var actual = cargasList[index].idGandola;
+                        var anterior = cargasList[index-1].idGandola;
+                        if(actual != anterior){
+                            corte = index;
+                            return false;
+                        }
+                    }
+                });
+
+                //distribuir remolques
+                $.each(cargasList, function(index, val){
+                    if(index < corte){
+                        cargas1.push(val);
+                    } else {
+                        cargas2.push(val);
+                    }
+                });
+
+                //setear remolques
+                if(typeof(corte) == 'undefined'){
+                    //si no existe (solo hay 1 remolque)
+                    $('#remolque1').show();
+                    $('#fleteRemolque1 option:selected').val(cargas1[0].idGandola);
+                    updateTable(table1, cargas1);
+                } else {
+                    $('#remolque1').show();
+                    $('#fleteRemolque1 option:selected').val(cargas1[0].idGandola);
+                    updateTable(table1, cargas1);
+
+                    $('#remolque2').show();
+                    $('#fleteRemolque2 option:selected').val(cargas2[0].idGandola);
+                    updateTable(table2, cargas2);
+                }
+            },
+            error: function(){
+                alert("error");
+            }
+        });
+
+
+        //abrir modal
+        $(modal).modal('show');
+
+        //cambiar titulo
+        $(modal+" .modal-title").text("Editar flete");
+
+        //agregar boton editar
+        $(modal+" .modal-footer button:first-child").remove();
+        $(modal+" .modal-footer").prepend('<button type="button" class="btnAccept" id="btnEditFlete"><span><i class="fas fa-check"></i></span><span>Editar</span></button>');
+
+        enableBtnEditInfo(idFlete);
+    }
+});
+
+function enableBtnEditInfo(idFlete){
+    $('#btnEditFlete').on({
+        click: function(){
+            var modal = "#modalFormFlete";
+            var cargasList = [];
+
+            //recorrer cargas
+            $.each(cargas1, function(i, val){
+                var c = {idGandola: $('#fleteRemolque1').val(), descripcion: cargas1[i].descripcion, peso: cargas1[i].peso};
+                cargasList.push(c);
+            });
+            $.each(cargas2, function(i, val){
+                var c = {idGandola: $('#fleteRemolque2').val(), descripcion: cargas2[i].descripcion, peso: cargas2[i].peso};
+                cargasList.push(c);
+            });
+
+            //metodo post
+            $.ajax({
+                url: '/Fletes/editarFlete',
+                data: JSON.stringify({
+                    Flete: {
+                        id: idFlete,
+                        idTrailer: $('#fleteTrailer').val(),
+                        idOperador: $('#fleteOperador').val(),
+                        idUsuario: "",
+                        Carga: cargasList
+                    }
+                }),
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function(){
+                    alert("success");
+                    window.location.href = "/Fletes/Lista";
+
+                    //cerrar modal
+                    $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
+                }
+            });
+
+        }
+    });
+}
+
+/* Edit scales in table */
+$('.btnShowEditFleteEscala').on({
+    click: function(){
+        var modal = "#modalFormFlete2";
+        var scales = "#scales";
+
+        if(!$(modal).find(scales).length){
+            $(scales).appendTo(modal+' #modalContent2');
+            $(scales).addClass('clearInfo block');
+        }
+
+        //inicializar tabla de escalas
+        //setDataTableEscalas();
+
+        //obtener valores de la tabla y los guarda en variables
+        var row = $(this).parents("tr").find("td");
+        idFlete = row.eq(1).text(); //id
+
+        getEscalaList(idFlete);
+
+        
+        //abrir modal
+        $(modal).modal('show');
+
+        //cambiar titulo
+        $(modal+" .modal-title").text("Editar escalas");
+
+        //agregar boton editar
+        $(modal+" .modal-footer button:first-child").remove();
+        $(modal+" .modal-footer").prepend('<button type="button" class="btnAccept none" id="btnEditFlete"><span><i class="fas fa-check"></i></span><span>Editar</span></button>');
+
+    }
+});
+
+/* Show more info flete */
+$('.btnShowInfoFlete').on({
+    click: function(){
+
+    }
+});
+
+/* Delete flete */
+$('.btnShowDeleteFlete').on({
+    click: function(){
+        //obtener id
+        var idFlete = $(this).parents("tr").find("td").eq(0).text();
+
+        //abrir modal
+        var modal = "#modalDeleteFlete";
+        $(modal).modal('show');
+        
+        //cambiar titulo
+        $(modal+" .modal-title").text("Eliminar flete");
+
+        //agregar boton eliminar
+        $(modal+" .modal-footer button:first-child").remove();
+        $(modal+" .modal-footer").prepend('<button type="button" class="btnCancel" id="btnDeleteFlete"><span><i class="fas fa-times"></i></span><span>Eliminar</span></button>');
+
+        enableBtnDeleteFlete(idFlete);
+    
+    }
+});
+
+function enableBtnDeleteFlete(idFlete){
+    $('#btnDeleteFlete').on({
+        click: function(){
+            var modal = "#modalDeleteFlete";
+
+            //metodo post
+            $.ajax({
+                url: '/Fletes/eliminarFlete?idFlete='+idFlete,
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                success: function(){
+                    alert("success");
+                    window.location.href = "/Fletes/Lista";
+
+                    //cerrar modal
+                    $(modal).modal('hide');
+                },
+                error: function(){
+                    alert("error");
+                }
+            });
+
+            alert(idFlete);
+        }
+    });
+}
+
+
 
 /* Manipulacion de escalas */
 function setDataTableEscalas(){
@@ -552,7 +791,7 @@ function setDataTableEscalas(){
 
 //fuction para actualizar la tabla de escalas
 function getEscalaList(idFlete) {
-    $.post("/Fletes/listaEscalas?idFlete="+idFlete, null, function(list){
+    $.get("/Fletes/listaEscalas?idFlete="+idFlete, null, function(list){
 
         //obtener tbody
         var setData = $('#escalaList');
@@ -563,14 +802,13 @@ function getEscalaList(idFlete) {
             //recorrer lista obtenida del controlador
             $.each(list, function(i, val){
                 var tr = '<tr>'+
-                            '<td class="details-control"><i class="fas fa-plus-square"></i></td>'+
                             '<td class="none">'+list[i].id+'</td>'+
                             '<td class="none">'+list[i].latitud+'</td>'+
                             '<td class="none">'+list[i].longitud+'</td>'+
                             '<td>'+list[i].nombre+'</td>'+
                             '<td class="none">'+list[i].descripcion+'</td>'+
                             '<td>'+list[i].fecha+'</td>'+
-                            '<td class="optionsTable"><button type="button" class="btnEdit btnShowEditEscala"><i class="fas fa-pencil-alt"></i></button><button type="button" class="btnDelete btnShowDeleteEscala"><i class="fas fa-trash-alt"></i></button></td>'+
+                            '<td><button type="button" class="btnEye btnShowInfoFlete"><i class="fas fa-eye"></i></button><button type="button" class="btnPin btnShowEditFleteEscala"><i class="fas fa-map-marker"></i></button><button type="button" class="btnEdit btnShowEditFlete"><i class="fas fa-pencil-alt"></i></button><button type="button" class="btnDelete btnShowDeleteFlete"><i class="fas fa-trash-alt"></i></button></td>'+
                         '</tr>';
                 
                 setData.append(tr);
@@ -591,13 +829,29 @@ function getEscalaList(idFlete) {
 
 $('#btnShowAddEscala').on({
     click: function(){
+
         //limpiar formulario
         $('.formEscala input').val("");
         $('.formEscala textarea').val("");
 
-        //abrir modal
         var modal = "#modalFormEscala";
-        $(modal).modal('show');
+        
+        //cerrar modal si se esta editando
+        if(($('#modalFormFlete2').data('bs.modal') || {}).isShown){
+            editFlete = true;
+            $('#modalFormFlete2').modal('hide');
+
+            //delay para abrir el modal
+            setTimeout(function() {
+                $(modal).modal({
+                    backdrop: 'static'
+                })
+            }, 400); //delay in miliseconds
+        } else {
+            editFlete = false;
+            //abrir modal
+            $(modal).modal('show');
+        }
 
         //cambiar titulo
         $(modal+" .modal-title").text("Agregar escala");
@@ -635,13 +889,40 @@ function enableBtnAdd(){
                     alert("success");
 
                     //actualizar tabla
-                    getEscalaList();
+                    getEscalaList(idFlete);
 
                     //cerrar modal
                     $(modal).modal('hide');
+
+                    if(editFlete == true){
+                        //delay para abrir el modal
+                        setTimeout(function() {
+                            $('#modalFormFlete2').modal({
+                                backdrop: 'static'
+                            })
+                        }, 500); //delay in miliseconds
+                        editFlete = false;
+                    }
+
                 },
                 error: function(){
                     alert("error");
+
+                    //actualizar tabla
+                    getEscalaList(idFlete);
+
+                    //cerrar modal
+                    $(modal).modal('hide');
+
+                    if(editFlete == true){
+                        //delay para abrir el modal
+                        setTimeout(function() {
+                            $('#modalFormFlete2').modal({
+                                backdrop: 'static'
+                            })
+                        }, 500); //delay in miliseconds
+                        editFlete = false;
+                    }
                 }
             });
 
@@ -728,7 +1009,7 @@ function enableBtnEdit(idEscala){
                     alert("success");
                     
                     //actualizar tabla
-                    getEscalaList();
+                    getEscalaList(idFlete);
 
                     //cerrar modal
                     $(modal).modal('hide');
@@ -762,12 +1043,12 @@ function btnShowDeleteEscala(){
             $(modal+" .modal-footer button:first-child").remove();
             $(modal+" .modal-footer").prepend('<button type="button" class="btnCancel" id="btnDeleteEscala"><span><i class="fas fa-times"></i></span><span>Eliminar</span></button>');
     
-            enableBtnDelete(idEscala);
+            enableBtnDeleteEscala(idEscala);
         }
     });
 }
 
-function enableBtnDelete(idEscala){
+function enableBtnDeleteEscala(idEscala){
     $('#btnDeleteEscala').on({
         click: function(){
             var modal = "#modalDeleteEscala";
@@ -781,7 +1062,7 @@ function enableBtnDelete(idEscala){
                     alert("success");
                     
                     //actualizar tabla
-                    getEscalaList();
+                    getEscalaList(idFlete);
 
                     //cerrar modal
                     $(modal).modal('hide');

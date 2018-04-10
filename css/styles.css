@@ -171,9 +171,17 @@ header {
     margin-bottom: 10px;
 }
 
+#generalInfo.clearInfo .fleteTitle {
+    display: none;
+}
+
+#generalInfo.clearInfo #optionsFlete {
+    display: none;
+}
+
 #selectTrailer {
-    border-left: 3px solid #F5D131;
-    border-right: 3px solid #F5D131;
+    border-left: 3px solid #DEDB39;
+    border-right: 3px solid #DEDB39;
 }
 
 #selectOperador {
@@ -214,6 +222,14 @@ header {
     display: none;
 }
 
+#scales.block {
+    display: block;
+}
+
+#scales.clearInfo .fleteTitle {
+    display: none;
+}
+
 #scales .bold {
     position: relative;
     display: block;
@@ -237,8 +253,6 @@ header {
 }
 
 
-
-
 /* Button edit and delete styles */
 .table-responsive {
     border: none;
@@ -256,8 +270,12 @@ table button:hover {
     top: -2px;
 }
 
+table button.btnEye {
+    color: #DEDB39;
+}
+
 table button.btnPin {
-    color: #F5D131;
+    color: #FCB535;
 }
 
 table button.btnEdit {
